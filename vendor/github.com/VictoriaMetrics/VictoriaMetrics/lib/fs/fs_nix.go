@@ -1,4 +1,4 @@
-//go:build darwin || freebsd
+//go:build linux || darwin || freebsd
 
 package fs
 
@@ -19,14 +19,4 @@ func totalSpace(stat statfs_t) uint64 {
 
 func statfs(path string, stat *statfs_t) (err error) {
 	return unix.Statfs(path, stat)
-}
-
-func getFsType(path string) string {
-	var stat statfs_t
-	err := statfs(path, &stat)
-	if err != nil {
-		return "unknown"
-	}
-
-	return unix.ByteSliceToString(stat.Fstypename[:])
 }

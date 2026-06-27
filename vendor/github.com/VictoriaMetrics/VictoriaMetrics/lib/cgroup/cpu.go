@@ -3,7 +3,6 @@ package cgroup
 import (
 	"fmt"
 	"os"
-	"path"
 	"runtime"
 	"strconv"
 	"strings"
@@ -101,31 +100,17 @@ func getOnlineCPUCount() float64 {
 	return n
 }
 
-// See https://www.freedesktop.org/software/systemd/man/latest/systemd.slice.html
-func getCPUQuotaV2(sysfsPrefix, cgroupPath string) (float64, error) {
-	subPath, err := readCgroupV2SubPath(cgroupPath)
+func getCPUQuotaV2(sysPrefix, cgroupPath string) (float64, error) {
+	data, err := getFileContents("cpu.max", sysPrefix, cgroupPath, "")
 	if err != nil {
-		subPath = "/"
+		return 0, err
 	}
-	var minQuota float64 = -1
-	for {
-		// travers sub path hierarchy and use a minimal value for stat
-		data, err := os.ReadFile(path.Join(sysfsPrefix, subPath, "cpu.max"))
-		if err == nil {
-			quota, err := parseCPUMax(strings.TrimSpace(string(data)))
-			if err != nil {
-				return 0, fmt.Errorf("cannot parse cpu.max at %s: %w", subPath, err)
-			}
-			if quota > 0 && (minQuota < 0 || quota < minQuota) {
-				minQuota = quota
-			}
-		}
-		if subPath == "/" || subPath == "." {
-			break
-		}
-		subPath = path.Dir(subPath)
+	data = strings.TrimSpace(data)
+	n, err := parseCPUMax(data)
+	if err != nil {
+		return 0, fmt.Errorf("cannot parse cpu.max file contents: %w", err)
 	}
-	return minQuota, nil
+	return n, nil
 }
 
 // See https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#cpu

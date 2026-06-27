@@ -415,16 +415,6 @@ func (ps *pipeStats) initRateFuncs(step int64) {
 	}
 }
 
-func (ps *pipeStats) initRateFuncsFromTimeBucket() bool {
-	for _, bf := range ps.byFields {
-		if bf.name == "_time" && bf.bucketSize > 0 {
-			ps.initRateFuncs(int64(bf.bucketSize))
-			return true
-		}
-	}
-	return false
-}
-
 const stateSizeBudgetChunk = 1 << 20
 
 func (ps *pipeStats) newPipeProcessor(concurrency int, stopCh <-chan struct{}, cancel func(), ppNext pipeProcessor) pipeProcessor {
@@ -1399,11 +1389,11 @@ func parsePipeStatsExt(lex *lexer, needStatsKeyword bool) (pipe, error) {
 		}
 		ps.entries = append(ps.entries, e)
 
-		if lex.isQueryPartTrailer() {
+		if lex.isKeyword("|", ")", "") {
 			break
 		}
 		if !lex.isKeyword(",") {
-			return nil, fmt.Errorf("unexpected token %q after [%s]; want ',', '|', ';' or ')'", lex.token, e)
+			return nil, fmt.Errorf("unexpected token %q after [%s]; want ',', '|' or ')'", lex.token, e)
 		}
 		lex.nextToken()
 	}
@@ -1452,7 +1442,7 @@ func parseStatsEntry(lex *lexer) (pipeStatsEntry, error) {
 	}
 
 	resultName := ""
-	if lex.isKeyword(",") || lex.isQueryPartTrailer() {
+	if lex.isKeyword(",", "|", ")", "") {
 		resultName = sf.String()
 		if iff != nil {
 			resultName += " " + iff.String()

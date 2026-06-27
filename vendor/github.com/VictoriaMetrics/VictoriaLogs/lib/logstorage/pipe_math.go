@@ -460,7 +460,7 @@ func parsePipeMath(lex *lexer) (pipe, error) {
 		switch {
 		case lex.isKeyword(","):
 			lex.nextToken()
-		case lex.isQueryPartTrailer():
+		case lex.isKeyword("|", ")", ""):
 			if len(mes) == 0 {
 				return nil, fmt.Errorf("missing 'math' expressions")
 			}
@@ -469,7 +469,7 @@ func parsePipeMath(lex *lexer) (pipe, error) {
 			}
 			return pm, nil
 		default:
-			return nil, fmt.Errorf("unexpected token after 'math' expression [%s]: %q; expecting ',', '|', ';' or ')'", mes[len(mes)-1], lex.token)
+			return nil, fmt.Errorf("unexpected token after 'math' expression [%s]: %q; expecting ',', '|' or ')'", mes[len(mes)-1], lex.token)
 		}
 	}
 }
@@ -481,7 +481,7 @@ func parseMathEntry(lex *lexer) (*mathEntry, error) {
 	}
 
 	resultField := ""
-	if lex.isKeyword(",") || lex.isQueryPartTrailer() {
+	if lex.isKeyword(",", "|", ")", "") {
 		resultField = me.String()
 	} else {
 		if lex.isKeyword("as") {

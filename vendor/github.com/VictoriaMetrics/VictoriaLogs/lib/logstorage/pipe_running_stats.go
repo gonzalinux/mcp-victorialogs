@@ -415,7 +415,7 @@ func parsePipeRunningStatsExt(lex *lexer, pipeName string) (pipe, error) {
 		f.f = sf
 
 		resultName := ""
-		if lex.isKeyword(",") || lex.isQueryPartTrailer() {
+		if lex.isKeyword(",", "|", ")", "") {
 			resultName = sf.String()
 		} else {
 			if lex.isKeyword("as") {
@@ -435,7 +435,7 @@ func parsePipeRunningStatsExt(lex *lexer, pipeName string) (pipe, error) {
 
 		funcs = append(funcs, f)
 
-		if lex.isQueryPartTrailer() {
+		if lex.isKeyword("|", ")", "") {
 			ps.funcs = funcs
 			return &ps, nil
 		}
