@@ -75,8 +75,8 @@ func (pu *pipeUnpackLogfmt) hasFilterInWithQuery() bool {
 	return pu.iff.hasFilterInWithQuery()
 }
 
-func (pu *pipeUnpackLogfmt) initFilterInValues(cache *inValuesCache, getFieldValuesFunc getFieldValuesFunc, keepSubquery bool) (pipe, error) {
-	iffNew, err := pu.iff.initFilterInValues(cache, getFieldValuesFunc, keepSubquery)
+func (pu *pipeUnpackLogfmt) initFilterInValues(cache *inValuesCache, getFieldValuesFunc getFieldValuesFunc) (pipe, error) {
+	iffNew, err := pu.iff.initFilterInValues(cache, getFieldValuesFunc)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ func parsePipeUnpackLogfmt(lex *lexer) (pipe, error) {
 	}
 
 	fromField := "_msg"
-	if !lex.isKeyword("fields", "result_prefix", "keep_original_fields", "skip_empty_results", ")", "|", "") {
+	if !lex.isKeyword("fields", "result_prefix", "keep_original_fields", "skip_empty_results") && !lex.isQueryPartTrailer() {
 		if lex.isKeyword("from") {
 			lex.nextToken()
 		}
