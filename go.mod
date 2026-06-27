@@ -12,7 +12,7 @@ require (
 
 require (
 	github.com/RoaringBitmap/roaring/v2 v2.14.5 // indirect
-	github.com/VictoriaMetrics/VictoriaMetrics v1.145.1-0.20260616130439-5b31a047a5bf // indirect
+	github.com/VictoriaMetrics/VictoriaMetrics v1.140.1-0.20260414051809-8a20ccf21db7 // indirect
 	github.com/VictoriaMetrics/metricsql v0.87.1 // indirect
 	github.com/bits-and-blooms/bitset v1.24.4 // indirect
 	github.com/blevesearch/bleve_index_api v1.3.11 // indirect

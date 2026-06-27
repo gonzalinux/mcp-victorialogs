@@ -152,7 +152,7 @@ Try not to second guess information - if you don't know something or lack inform
 	case "http":
 		slog.Info("Starting server in HTTP mode", "addr", c.ListenAddr())
 		heartBeatOption := server.WithHeartbeatInterval(c.HeartbeatInterval())
-		loggerOption := server.WithLogger(logger)
+		loggerOption := server.WithStreamableHTTPLogger(slog.Default())
 		srv := server.NewStreamableHTTPServer(s, heartBeatOption, loggerOption)
 		mux.Handle("/mcp", srv)
 		mux.Handle("/", spaHandler())

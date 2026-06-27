@@ -13,7 +13,6 @@ import (
 	"github.com/VictoriaMetrics/VictoriaMetrics/lib/filestream"
 	"github.com/VictoriaMetrics/VictoriaMetrics/lib/fs/fsutil"
 	"github.com/VictoriaMetrics/VictoriaMetrics/lib/logger"
-	"github.com/VictoriaMetrics/metrics"
 )
 
 var tmpFileNum atomicutil.Uint64
@@ -352,9 +351,4 @@ type diskSpaceEntry struct {
 // IsDirOrSymlink returns true if de is directory or symlink.
 func IsDirOrSymlink(de os.DirEntry) bool {
 	return de.IsDir() || (de.Type()&os.ModeSymlink == os.ModeSymlink)
-}
-
-// RegisterPathFsMetrics exposes filesystem information for the given path as metrics.
-func RegisterPathFsMetrics(path string) {
-	_ = metrics.GetOrCreateGauge(fmt.Sprintf(`vm_fs_info{path=%q, fs_type=%q}`, path, getFsType(path)), func() float64 { return 1 })
 }
