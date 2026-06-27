@@ -1,10 +1,9 @@
-module github.com/gonzalinux/mcp-victorialogs
+module github.com/VictoriaMetrics/mcp-victorialogs
 
 go 1.26.4
 
 require (
 	github.com/VictoriaMetrics/VictoriaLogs v1.121.1-0.20260616132739-c901a1e31cb3
-	github.com/VictoriaMetrics/mcp-victorialogs v1.9.0
 	github.com/VictoriaMetrics/metrics v1.44.0
 	github.com/blevesearch/bleve/v2 v2.5.7
 	github.com/mark3labs/mcp-go v0.48.0

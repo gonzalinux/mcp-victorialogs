@@ -36,16 +36,6 @@ github.com/VictoriaMetrics/VictoriaMetrics/lib/stringsutil
 github.com/VictoriaMetrics/VictoriaMetrics/lib/syncwg
 github.com/VictoriaMetrics/VictoriaMetrics/lib/timerpool
 github.com/VictoriaMetrics/VictoriaMetrics/lib/timeutil
-# github.com/VictoriaMetrics/mcp-victorialogs v1.9.0
-## explicit; go 1.26.2
-github.com/VictoriaMetrics/mcp-victorialogs/cmd/mcp-victorialogs/config
-github.com/VictoriaMetrics/mcp-victorialogs/cmd/mcp-victorialogs/hooks
-github.com/VictoriaMetrics/mcp-victorialogs/cmd/mcp-victorialogs/logging
-github.com/VictoriaMetrics/mcp-victorialogs/cmd/mcp-victorialogs/prompts
-github.com/VictoriaMetrics/mcp-victorialogs/cmd/mcp-victorialogs/resources
-github.com/VictoriaMetrics/mcp-victorialogs/cmd/mcp-victorialogs/tools
-github.com/VictoriaMetrics/mcp-victorialogs/cmd/mcp-victorialogs/utils
-github.com/VictoriaMetrics/mcp-victorialogs/web
 # github.com/VictoriaMetrics/metrics v1.44.0
 ## explicit; go 1.24.0
 github.com/VictoriaMetrics/metrics

@@ -4,8 +4,6 @@ github.com/VictoriaMetrics/VictoriaLogs v1.121.1-0.20260616132739-c901a1e31cb3 h
 github.com/VictoriaMetrics/VictoriaLogs v1.121.1-0.20260616132739-c901a1e31cb3/go.mod h1:H4sDxcvk6OmC6zOt++IlDyrwfbn4F1eSLwMpR+kpRt8=
 github.com/VictoriaMetrics/VictoriaMetrics v1.145.1-0.20260616130439-5b31a047a5bf h1:QPlIVLxNRdULY4L27M7dyenAShRmIi/iJKtPPScWf18=
 github.com/VictoriaMetrics/VictoriaMetrics v1.145.1-0.20260616130439-5b31a047a5bf/go.mod h1:W5VK3ATrBzhv9mazyL1ix6S+/46e7syf1Jbja60E/6E=
-github.com/VictoriaMetrics/mcp-victorialogs v1.9.0 h1:fHH8G0W7psUGP04ASlwl6k6owLJaf8q0z70LqGX9fIA=
-github.com/VictoriaMetrics/mcp-victorialogs v1.9.0/go.mod h1:gIwCWR6kBHMHLCsuB75W+tgeWqv5BOv2HL8kC8eyXuw=
 github.com/VictoriaMetrics/metrics v1.44.0 h1:Fr8yqQSV+ZfYaDD/anqk1E8e9YPgfleSleJmAI0M0Tw=
 github.com/VictoriaMetrics/metrics v1.44.0/go.mod h1:xDM82ULLYCYdFRgQ2JBxi8Uf1+8En1So9YUwlGTOqTc=
 github.com/VictoriaMetrics/metricsql v0.87.1 h1:GdIblCDgXsrBJcBSDtFT8SLK7P+QHijdQmcr4L/f0Go=
