@@ -23,7 +23,7 @@ import (
 	"github.com/VictoriaMetrics/VictoriaLogs/lib/prefixfilter"
 )
 
-// QueryContext is used for executing the query passed to NewQueryContext().
+// QueryContext is used for execting the query passed to NewQueryContext()
 type QueryContext struct {
 	// Context is the context for executing the Query.
 	Context context.Context
@@ -43,12 +43,12 @@ type QueryContext struct {
 	// HiddenFieldsFilters is an optional list of field filters, which must be hidden during query execution.
 	//
 	// The list may contain full field names and field prefixes ending with *.
-	// Prefixes match all the fields starting with the given prefix.
+	// Prefix match all the fields starting with the given prefix.
 	HiddenFieldsFilters []string
 
 	// startTime is creation time for the QueryContext.
 	//
-	// It is used for calculating query duration.
+	// It is used for calculating query druation.
 	startTime time.Time
 }
 
@@ -128,14 +128,13 @@ type storageSearchOptions struct {
 	// hiddenFieldsFilter is the filter of fields, which must be hidden during query
 	hiddenFieldsFilter *prefixfilter.Filter
 
-	// timeOffset is the offset in nanoseconds, which must be subtracted from the selected _time values
-	// before these values are passed to query pipes.
+	// timeOffset is the offset in nanoseconds, which must be subtracted from the selected the _time values before these values are passed to query pipes.
 	timeOffset int64
 }
 
 // partitionSearchOptions is search options for the partition.
 //
-// This struct must be created via partition.getSearchOptions() call.
+// this struct must be created via partition.getSearchOptions() call.
 type partitionSearchOptions struct {
 	// Optional sorted list of tenantIDs for the search.
 	// If it is empty, then the search is performed by streamIDs
@@ -1127,7 +1126,7 @@ func (db *DataBlock) RowsCount() int {
 
 // GetColumns returns columns from db.
 //
-// If needSortColumns is set, then the returned columns are sorted in alphabetical order.
+// If needSortSolumns is set, then the returned columns are sorted in alphabetical order
 func (db *DataBlock) GetColumns(needSortColumns bool) []BlockColumn {
 	if needSortColumns {
 		sort.Slice(db.columns, func(i, j int) bool {

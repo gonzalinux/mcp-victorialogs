@@ -620,7 +620,7 @@ func parsePipeTop(lex *lexer) (pipe, error) {
 			return nil, fmt.Errorf("cannot parse 'by(...)': %w", err)
 		}
 		byFields = bfs
-	} else if !lex.isKeyword("hits", "rank") && !lex.isQueryPartTrailer() {
+	} else if !lex.isKeyword("hits", "rank", ")", "|", "") {
 		bfs, err := parseCommaSeparatedFields(lex)
 		if err != nil {
 			return nil, fmt.Errorf("cannot parse 'by ...': %w", err)
@@ -674,11 +674,11 @@ func parseRankFieldName(lex *lexer) (string, error) {
 	rankFieldName := "rank"
 	if lex.isKeyword("as") {
 		lex.nextToken()
-		if lex.isKeyword("(") || lex.isQueryPartTrailer() {
+		if lex.isKeyword("", "|", ")", "(") {
 			return "", fmt.Errorf("missing rank name")
 		}
 	}
-	if !lex.isKeyword("limit") && !lex.isQueryPartTrailer() {
+	if !lex.isKeyword("", "|", ")", "limit") {
 		s, err := parseFieldName(lex)
 		if err != nil {
 			return "", err

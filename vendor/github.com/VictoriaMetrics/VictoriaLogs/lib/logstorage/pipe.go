@@ -122,13 +122,12 @@ func parsePipes(lex *lexer) ([]pipe, error) {
 		pipes = append(pipes, p)
 
 		switch {
-		case lex.isQueryPartTrailer():
-			if !lex.isKeyword("|") {
-				return pipes, nil
-			}
+		case lex.isKeyword("|"):
 			lex.nextToken()
+		case lex.isKeyword(")", ""):
+			return pipes, nil
 		default:
-			return nil, fmt.Errorf("unexpected token after [%s]: %q; expecting '|', ';' or ')'", pipes[len(pipes)-1], lex.token)
+			return nil, fmt.Errorf("unexpected token after [%s]: %q; expecting '|' or ')'", pipes[len(pipes)-1], lex.token)
 		}
 	}
 }
@@ -179,7 +178,6 @@ func initPipeParsers() {
 	pipeParsers = map[string]pipeParseFunc{
 		"block_stats":       parsePipeBlockStats,
 		"blocks_count":      parsePipeBlocksCount,
-		"coalesce":          parsePipeCoalesce,
 		"collapse_nums":     parsePipeCollapseNums,
 		"copy":              parsePipeCopy,
 		"cp":                parsePipeCopy,

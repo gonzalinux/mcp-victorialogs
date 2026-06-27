@@ -256,7 +256,6 @@ func parsePipeUnroll(lex *lexer) (pipe, error) {
 }
 
 func unpackJSONArray(dst []string, a *arena, s string) []string {
-	s = trimJSONWhitespace(s)
 	if s == "" || s[0] != '[' {
 		return dst
 	}

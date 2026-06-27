@@ -102,7 +102,7 @@ func parsePipeLast(lex *lexer) (pipe, error) {
 func parsePipeLastFirst(lex *lexer) (*pipeSort, error) {
 	var ps pipeSort
 	ps.limit = 1
-	if !lex.isKeyword("by", "partition", "rank", "(") && !lex.isQueryPartTrailer() {
+	if !lex.isKeyword("by", "partition", "rank", "(", "|", ")", "") {
 		s, err := lex.nextCompoundToken()
 		if err != nil {
 			return nil, fmt.Errorf("cannot parse number: %w", err)
@@ -144,7 +144,7 @@ func parsePipeLastFirst(lex *lexer) (*pipeSort, error) {
 	if lex.isKeyword("rank") {
 		rankFieldName, err := parseRankFieldName(lex)
 		if err != nil {
-			return nil, fmt.Errorf("cannot read rank field name: %w", err)
+			return nil, fmt.Errorf("cannot read rank field name: %s", err)
 		}
 		ps.rankFieldName = rankFieldName
 	}

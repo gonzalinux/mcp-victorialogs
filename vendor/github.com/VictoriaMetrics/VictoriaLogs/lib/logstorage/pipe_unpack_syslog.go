@@ -2,7 +2,6 @@ package logstorage
 
 import (
 	"fmt"
-	"strings"
 	"sync/atomic"
 	"time"
 
@@ -92,7 +91,6 @@ func (pu *pipeUnpackSyslog) newPipeProcessor(_ int, _ <-chan struct{}, _ func(),
 		year := currentYear.Load()
 		p := GetSyslogParser(int(year), pu.offsetTimezone)
 
-		s = strings.TrimLeft(s, " \t\n\r")
 		p.Parse(s)
 		for _, f := range p.Fields {
 			uctx.addField(f.Name, f.Value)
@@ -137,7 +135,7 @@ func parsePipeUnpackSyslog(lex *lexer) (pipe, error) {
 	}
 
 	fromField := "_msg"
-	if !lex.isKeyword("offset", "result_prefix", "keep_original_fields") && !lex.isQueryPartTrailer() {
+	if !lex.isKeyword("offset", "result_prefix", "keep_original_fields", ")", "|", "") {
 		if lex.isKeyword("from") {
 			lex.nextToken()
 		}
